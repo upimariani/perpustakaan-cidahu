@@ -265,6 +265,17 @@ class cKelolaDataMaster extends CI_Controller
 		$this->session->set_flashdata('success', 'Data Buku Berhasil Diperbaharui!');
 		redirect('cKelolaDataMaster/buku');
 	}
+	public function vlearning($id)
+	{
+		$data = array(
+			'buku' => $this->db->query("SELECT * FROM `buku` WHERE id_buku='" . $id . "'")->row()
+		);
+		$this->load->view('Layouts/head');
+		$this->load->view('Layouts/navbar');
+		$this->load->view('Layouts/aside');
+		$this->load->view('buku/elearning', $data);
+		$this->load->view('Layouts/footer');
+	}
 
 	public function elearning($id)
 	{

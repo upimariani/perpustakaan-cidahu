@@ -36,7 +36,8 @@ class cLearning extends CI_Controller
 	{
 		$data = array(
 			'jml' => $this->mEbook->jml(),
-			'ebook' => $this->mEbook->ebook()
+			'ebook' => $this->mEbook->ebook(),
+			'peminjaman' => $this->mEbook->informasi_peminjaman()
 		);
 		$this->load->view('Ebook/Layouts/head', $data);
 		$this->load->view('Ebook/vbook', $data);

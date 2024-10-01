@@ -86,9 +86,9 @@
 												<a href="<?= base_url('cKelolaDataMaster/delete_buku/' . $value->id_buku) ?>" class="btn btn-app">
 													<i class="fas fa-trash"></i> Delete
 												</a>
-												<button type="button" data-toggle="modal" data-target="#elearning<?= $value->id_buku ?>" class="btn btn-app">
+												<a href="<?= base_url('cKelolaDataMaster/vlearning/' . $value->id_buku) ?>" class="btn btn-app">
 													<i class="fas fa-plus"></i> E-Learning
-												</button>
+												</a>
 											</td>
 										</tr>
 									<?php
@@ -126,45 +126,6 @@
 	<!-- /.content -->
 </div>
 
-<?php
-foreach ($buku as $key => $value) {
-?>
-	<form role="form" action="<?= base_url('cKelolaDataMaster/elearning/' . $value->id_buku) ?>" method="POST" enctype="multipart/form-data" accept-charset="utf-8">
-		<div class="modal fade" id="elearning<?= $value->id_buku ?>">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Masukkan Data E-Learning <br>Buku <strong> <?= $value->judul ?></strong></h4>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<div class="card-body">
-							<div class="form-group">
-								<label for="exampleInputPassword1">Sinopsis</label>
-								<textarea class="textarea" name="sinopsis" placeholder="Place some text here" style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><?= $value->sinopsis ?></textarea>
-							</div>
-							<div class="form-group">
-								<label for="exampleInputPassword1">File e-Buku</label><br>
-								<a href="<?= base_url('asset/elearning/' . $value->file) ?>"><?= $value->file ?></a>
-								<input type="file" name="elearning" class="form-control" id="exampleInputPassword1">
-							</div>
-						</div>
-						<!-- /.card-body -->
-					</div>
-					<div class="modal-footer justify-content-between">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Save changes</button>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-		</div>
-	</form>
-<?php
-}
-?>
+
 
 <!-- /.modal -->

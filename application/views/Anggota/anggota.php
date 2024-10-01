@@ -37,7 +37,32 @@
 							<h3 class="card-title">Informasi Anggota Perpustakaan</h3><br>
 							<a href="<?= base_url('cAnggota/create') ?>" class="btn btn-warning mt-3">Create New Anggota</a>
 							<a href="<?= base_url('cAnggota/cetak') ?>" class="btn btn-info mt-3">Cetak Anggota</a>
+						</div>
+						<div class="card">
+							<div class="card-header"></div>
+							<div class="card-body">
+								<form action="<?= base_url('cAnggota/cetak_kartu') ?>" method="POST">
+									<div class="row">
+										<div class="col-lg-6">
+											<label>Pilih Nama Anggota yang Akan Dicetak</label>
+											<select name="id_anggota" class="form-control" required>
+												<option value="">---Pilih Siswa---</option>
+												<?php
+												foreach ($anggota as $key => $value) {
+												?>
+													<option value="<?= $value->id_anggota ?>"><?= $value->nama_anggota ?></option>
+												<?php
+												}
+												?>
 
+											</select>
+											<button type="submit" class="btn btn-success mt-3">Cetak Kartu Anggota</button>
+										</div>
+										<div class="col-lg-6"></div>
+									</div>
+								</form>
+
+							</div>
 						</div>
 						<!-- /.card-header -->
 						<div class="card-body">

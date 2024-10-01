@@ -38,6 +38,10 @@ class mEbook extends CI_Model
 		$this->db->where('id_buku', $id);
 		return $this->db->get()->row();
 	}
+	public function informasi_peminjaman()
+	{
+		return $this->db->query("SELECT * FROM `peminjaman` JOIN anggota ON peminjaman.id_anggota=anggota.id_anggota WHERE peminjaman.id_anggota='" . $this->session->userdata('id') . "'")->result();
+	}
 
 	//menampilkan history ebook
 	public function histori()

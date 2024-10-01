@@ -25,10 +25,12 @@ class cAnggota extends CI_Controller
 	}
 	public function create()
 	{
-		$this->form_validation->set_rules('nama', 'Nama Anggota', 'required');
+		$this->form_validation->set_rules('fieldname', 'fieldlabel', 'trim|required|min_length[5]|max_length[12]');
+
+		$this->form_validation->set_rules('nama', 'Nama Anggota', 'required|alpha');
 		$this->form_validation->set_rules('kelas', 'Kelas Anggota', 'required');
 		$this->form_validation->set_rules('jk', 'Jenis Kelamin', 'required');
-		$this->form_validation->set_rules('nis', 'NIS', 'required');
+		$this->form_validation->set_rules('nis', 'NIS', 'required|min_length[7]|max_length[7]');
 
 		if ($this->form_validation->run() == FALSE) {
 			$this->load->view('Layouts/head');
@@ -94,7 +96,7 @@ class cAnggota extends CI_Controller
 
 
 		$pdf->SetFont('Times', 'B', 14);
-		$pdf->Image('asset/smp.jpg', 10, 3, 28);
+		$pdf->Image('asset/smp.png', 10, 3, 28);
 		$pdf->Cell(200, 5, 'SMP NEGERI 2 CIDAHU', 0, 1, 'C');
 		$pdf->SetFont('Times', '', 10);
 		$pdf->Cell(200, 20, 'Jln. Raya Cikeusik Cidahu, Kec. Cidahu Kab. Kuningan, Jawa Barat', 0, 0, 'C');
@@ -138,6 +140,80 @@ class cAnggota extends CI_Controller
 		$pdf->SetFont('Times', 'B', 9);
 		$pdf->Cell(95, 7, '(......................)', 0, 0, 'C');
 		$pdf->Cell(95, 7, '(......................)', 0, 0, 'C');
+
+		$pdf->Output();
+	}
+	public function cetak_kartu()
+	{
+		$id_anggota = $this->input->post('id_anggota');
+
+		require('asset/fpdf/fpdf.php');
+
+		// intance object dan memberikan pengaturan halaman PDF
+		$pdf = new FPDF('L', 'mm', array(150, 100));
+		$pdf->AddPage();
+
+
+		$pdf->SetFont('Times', 'B', 14);
+		$pdf->Image('asset/smp.png', 10, 3, 20);
+		$pdf->Cell(150, 5, 'SMP NEGERI 2 CIDAHU', 0, 1, 'C');
+		$pdf->SetFont('Times', '', 10);
+		$pdf->Cell(150, 10, 'Jln. Raya Cikeusik Cidahu, Kec. Cidahu Kab. Kuningan, Jawa Barat', 0, 0, 'C');
+
+		$pdf->SetLineWidth(1);
+		$pdf->Line(10, 33, 140, 33);
+		$pdf->SetLineWidth(0);
+		$pdf->Line(10, 32, 140, 32);
+		$pdf->Cell(3, 23, '', 0, 1);
+
+		$dt = $this->db->query("SELECT * FROM `anggota` WHERE id_anggota='" . $id_anggota . "'")->result();
+
+		$pdf->SetFont('Times', 'B', 10);
+		$pdf->Cell(130, 5, 'KARTU ANGGOTA PERPUSTAKAAN', 0, 1, 'C');
+		$pdf->SetFont('Times', '', 10);
+
+		foreach ($dt as $key => $value) {
+			if ($value->jk == '1') {
+				$jk = 'Perempuan';
+			} else {
+				$jk = 'Laki - Laki';
+			}
+
+			$pdf->Cell(3, 3, '', 0, 1);
+			$pdf->SetFont('Times', 'B', 7);
+			$pdf->Cell(60, 4, 'Nama:', 0, 0, 'R');
+			$pdf->SetFont('Times', '', 7);
+			$pdf->Cell(50, 4, $value->nama_anggota, 0, 1, 'L');
+
+
+			$pdf->SetFont('Times', 'B', 7);
+			$pdf->Cell(60, 4, 'NIS:', 0, 0, 'R');
+			$pdf->SetFont('Times', '', 7);
+			$pdf->Cell(50, 4, $value->nis, 0, 1, 'L');
+
+			$pdf->SetFont('Times', 'B', 7);
+			$pdf->Cell(60, 4, 'Jenis Kelamin:', 0, 0, 'R');
+			$pdf->SetFont('Times', '', 7);
+			$pdf->Cell(50, 4, $jk, 0, 1, 'L');
+
+			$pdf->SetFont('Times', 'B', 7);
+			$pdf->Cell(60, 4, 'Kelas:', 0, 0, 'R');
+			$pdf->SetFont('Times', '', 7);
+			$pdf->Cell(50, 4, $value->kelas, 0, 1, 'L');
+
+			$pdf->SetFont('Times', '', 7);
+		}
+
+		$pdf->Cell(3, 3, '', 0, 1);
+		$pdf->Cell(45, 3, 'Mengetahui,', 0, 0, 'C');
+		$pdf->Cell(130, 3, 'Cidahu, ' . date('j F Y'), 0, 1, 'C');
+		$pdf->Cell(45, 3, 'Kepala Perpustakaan', 0, 0, 'C');
+		$pdf->Cell(130, 3, 'Admin Perpustakaan', 0, 1, 'C');
+		$pdf->Cell(3, 3, '', 0, 1, 'C');
+
+		$pdf->SetFont('Times', 'B', 9);
+		$pdf->Cell(45, 5, '(......................)', 0, 0, 'C');
+		$pdf->Cell(130, 5, '(......................)', 0, 0, 'C');
 
 		$pdf->Output();
 	}

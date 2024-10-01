@@ -75,7 +75,7 @@
 						<!-- this row will not appear when printing -->
 						<div class="row no-print">
 							<div class="col-12">
-								<button class="btn btn-default" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+								<a href="<?= base_url('KepalaPerpustakaan/cLaporanBuku') ?>" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
 							</div>
 						</div>
 					</div>

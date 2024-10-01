@@ -41,7 +41,7 @@
 									<div class="col-lg-6">
 										<div class="form-group">
 											<label for="exampleInputEmail1">NIS Anggota</label>
-											<input type="text" value="<?= set_value('nis') ?>" name="nis" class="form-control" placeholder="Masukkan NIS Anggota">
+											<input type="number" value="<?= set_value('nis') ?>" name="nis" class="form-control" placeholder="Masukkan NIS Anggota">
 											<?= form_error('nis', '<small class="text-danger">', '</small>') ?>
 										</div>
 									</div>

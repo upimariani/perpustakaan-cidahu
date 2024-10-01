@@ -85,7 +85,7 @@
 
 				<div class="col-md-6 col-sm-6 col-sm-push-6">
 					<div class="mu-hero-right">
-						<img style="width:150px" src="<?= base_url('asset/smp.jpg') ?>" alt="Ebook img">
+						<img style="width:200px" src="<?= base_url('asset/smp.png') ?>" alt="Ebook img">
 					</div>
 				</div>
 
@@ -217,6 +217,7 @@
 									<!-- / Single Counter -->
 
 								</div>
+
 							</div>
 
 
